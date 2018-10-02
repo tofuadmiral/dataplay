@@ -1,5 +1,4 @@
-# writing a python script to use pandas
-
+# writing a python script to use pandas for the first time
 
 import pandas as pd
 
