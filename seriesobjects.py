@@ -24,3 +24,18 @@ ser_art = pd.Series(data=songs, index=artists)
 series_dictionary = pd.Series(song_arts)
 print(series_dictionary)
 
+## basics
+
+# read a file type is pd.read_filetype(path)
+# then convert it into a data frame object using pd.DataFrame()
+# then convert back to filetype df.to_filetype(filename)
+
+
+## also a variety of different functions as well
+# df.mean(), df.corr(), df.count(), df.max(), df.min(), df.median(), df.std()
+# can select by position df.iloc[] or by index df.loc[] df.sort_values
+
+## data cleaning
+# can check for pd.isnull(), pd.isnull().sum(), pd.fillna(x), pd.fillna(s.mean())
+# can append rows or concat columns if others equal
+# can also do joins like SQL 
