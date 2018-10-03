@@ -45,7 +45,43 @@ test_images = test_images / 255.0
 # display first 25 images from training set and display class name
 # after this, we'll be ready to build and train
 
+plt.figure(figsize=(10, 10))
+for i in range(25):
+    plt.subplot(5, 5, i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(train_images[i], cmap=plt.cm.binary)
+    plt.xlabel(label_names[train_labels[i]])
 
+plt.show()
 
+## now we'll configure the layers and then build the model
+
+# basic block is the layer
+# layers extract representations
+# chain tgt simple layers
+
+model = keras.Sequential([
+    keras.layers.Flatten(input_shape=(28, 28)), 
+    keras.layers.Dense(128, activaition = tf.nn.relu), 
+    keras.layers.Dense(10, activation=tf.nn.softmax)
+])
+# first layer just flattens into one d array of 784 pixels
+# then two dense layers, fully connected neural layers
+# first has 128 nodes, second has 10 node softmax
+# the second has 10 probability scores that sum to 1
+# each node has a score that indiciates whether belongs to one of ten classes
+
+# now we need to add some settings
+# loss function to measure how accurate, minimize this
+# optimizer to update the model based on data and loss func
+# metrics: monitor training, i.e. accuracy is the number that are correct
+
+model.compile(optimizer=tf.train.AdamOptimizer(), 
+              loss='sparse_categorical_crossentropy',
+              metrics=['accuracy'])
+              
+model.fit(train_images, train_labels, epochs=5)
 
 
