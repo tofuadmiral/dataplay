@@ -27,8 +27,6 @@ print(train_images.shape)
 print(len(train_labels))
 print(len(test_images)) # 6-1 split for train vs test
 
-print(train_labels)
-
 plt.figure()
 plt.imshow(train_images[0])
 plt.colorbar()
@@ -54,7 +52,6 @@ for i in range(25):
     plt.imshow(train_images[i], cmap=plt.cm.binary)
     plt.xlabel(label_names[train_labels[i]])
 
-plt.show()
 
 ## now we'll configure the layers and then build the model
 
@@ -64,7 +61,7 @@ plt.show()
 
 model = keras.Sequential([
     keras.layers.Flatten(input_shape=(28, 28)), 
-    keras.layers.Dense(128, activaition = tf.nn.relu), 
+    keras.layers.Dense(128, activation = tf.nn.relu), 
     keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
 # first layer just flattens into one d array of 784 pixels
@@ -74,7 +71,7 @@ model = keras.Sequential([
 # each node has a score that indiciates whether belongs to one of ten classes
 
 # now we need to add some settings
-# loss function to measure how accurate, minimize this
+# loss function to measure how accurate the model is during training, minimize this
 # optimizer to update the model based on data and loss func
 # metrics: monitor training, i.e. accuracy is the number that are correct
 
@@ -82,6 +79,24 @@ model.compile(optimizer=tf.train.AdamOptimizer(),
               loss='sparse_categorical_crossentropy',
               metrics=['accuracy'])
               
-model.fit(train_images, train_labels, epochs=5)
+
+# now we train
+# involves feed the training data in, train_images and train_labels
+# then model learns
+# we ask the model to make predictions on test_images
+# we verify that it's right via test_labels
+
+print(model.fit(train_images, train_labels, epochs=5))
+
+
+# now we want to see how it performs on the test dataset
+test_loss, test_acc, = model.evaluate(test_images, test_labels)
+print('Test Accuracy: ', test_acc, '\ntest loss: ', test_loss)
+
+# actually performs worse on this stuff, which is an example of overfitting
+# overfitting is when the model performs worse on test data then the training data
+
+# now, let's make some predictions 
+
 
 
