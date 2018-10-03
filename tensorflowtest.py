@@ -52,6 +52,9 @@ for i in range(25):
     plt.imshow(train_images[i], cmap=plt.cm.binary)
     plt.xlabel(label_names[train_labels[i]])
 
+plt.show()
+
+
 
 ## now we'll configure the layers and then build the model
 
@@ -88,6 +91,8 @@ model.compile(optimizer=tf.train.AdamOptimizer(),
 
 print(model.fit(train_images, train_labels, epochs=5))
 
+# CLOSE THE WINDOWS bc we know what image it's going to be 
+plt.close(all)
 
 # now we want to see how it performs on the test dataset
 test_loss, test_acc, = model.evaluate(test_images, test_labels)
@@ -97,6 +102,11 @@ print('Test Accuracy: ', test_acc, '\ntest loss: ', test_loss)
 # overfitting is when the model performs worse on test data then the training data
 
 # now, let's make some predictions 
+predictions = model.predict(test_images)
+print(predictions[0])
+whichcategory=np.argmax(predictions[0])
+print('the max category is: ', whichcategory, 'which corresponds to: ', label_names[whichcategory])
+
 
 
 
