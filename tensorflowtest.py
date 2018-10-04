@@ -92,7 +92,7 @@ model.compile(optimizer=tf.train.AdamOptimizer(),
 print(model.fit(train_images, train_labels, epochs=5))
 
 # CLOSE THE WINDOWS bc we know what image it's going to be 
-plt.close(all)
+plt.close('all')
 
 # now we want to see how it performs on the test dataset
 test_loss, test_acc, = model.evaluate(test_images, test_labels)
