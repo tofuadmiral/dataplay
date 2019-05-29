@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
-  render() {
+  render() { // draw from CSS to get square classname, and then show value 
     return (
-      <button className="square">
-        {/* TODO */}
+      <button className="square"> 
+        {/* TODO */
+            this.props.value // shows the value of the square 
+        }
       </button>
     );
   }
@@ -14,7 +16,8 @@ class Square extends React.Component {
 
 class Board extends React.Component {
   renderSquare(i) {
-    return <Square />;
+    return <Square value={i}/>; // changed to take in a value, which is i 
+                // passing a prop from parent board to a child square, always flow from parent to children
   }
 
   render() {
@@ -31,7 +34,7 @@ class Board extends React.Component {
         <div className="board-row">
           {this.renderSquare(3)}
           {this.renderSquare(4)}
-          {this.renderSquare(5)}
+          {this.renderSquare(5)} 
         </div>
         <div className="board-row">
           {this.renderSquare(6)}
