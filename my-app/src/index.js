@@ -22,11 +22,11 @@ class Square extends React.Component {
 
 
     return (
-      <button className="square" onClick={() => {this.setState({value: 'X'})}}>  
+      <button className="square" onClick={ () => this.props.onClick() }>  
         {/* TODO */
             //this.props.value // shows the value of the square 
             // show the state 
-            this.state.value
+            this.props.value
         }
       </button>
     );
@@ -34,8 +34,33 @@ class Square extends React.Component {
 }
 
 class Board extends React.Component {
+
+    // add a constructor so we can hold states here
+    constructor(props){
+        super(props);
+        this.state = {
+            squares: Array(9).fill(null), // pass this prop down to fill the specific square 
+        }
+    }
+
+
+    // now adding some code to actually handle the click
+
+    handleClick(i) {
+        const squares = this.state.squares.slice();
+        squares[i]='X';
+        this.setState({squares: squares});
+    }
+
+
   renderSquare(i) {
-    return <Square value={i}/>; // changed to take in a value, which is i 
+    return <Square value={this.state.squares[i]}
+            // also hand down a function, onClick that the square can call
+            // handle is a convention!!
+            onClick={ () => this.handleClick(i)} // passing down this as a prop, the prop is a function!!!
+         />;  // now, take the state value from parent board
+    
+    // changed to take in a value, which is i  
                 // passing a prop from parent board to a child square, always flow from parent to children
   }
 
